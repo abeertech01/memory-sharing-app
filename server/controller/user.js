@@ -32,7 +32,7 @@ export const signin = async (req, res) => {
   }
 };
 
-export const signup = (req, res) => {
+export const signup = async (req, res) => {
   const { email, password, confirmPassword, firstName, lastName } = req.body;
 
   try {
@@ -56,8 +56,10 @@ export const signup = (req, res) => {
       expiresIn: "1h",
     });
 
-    res.status(200).json({ message: "Something went wrong." });
+    res.status(200).json({ result, token });
   } catch (error) {
     res.status(500).json({ message: "Something went wrong!" });
+
+    console.log(error);
   }
 };
